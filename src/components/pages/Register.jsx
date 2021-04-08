@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Link from '@material-ui/core/Link';
+import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -40,16 +40,23 @@ const validationSchema = yup.object({
     .min(10, 'Phone Number should be of minimum 10 characters length')
     .max(10, 'Phone should be of maximum 10 characters length')
     .required('Phone Number is required'),
+  role: yup
+    .boolean().required(),
   rib: yup
-    .string('Enter your RIB Number')
-    .min(24, 'RIB should be of minimum 24 characters length')
-    .max(24, 'RIB should be of maximum 24 characters length')
-    .required('RIB is required'),
+    .string('Enter your Rib')
+    .min(24, 'Rib should be of minimum 10 characters length')
+    .max(24, 'Rib should be of maximum 10 characters length')
+    .when('role', {
+      is: true,
+      then: yup.string().required('Rib is REquired'),
+    }),
 
 });
 
 const Register = () =>
 {
+  // const [checked, setChecked] = useState(false)
+  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -59,18 +66,15 @@ const Register = () =>
       cin: '',
       phone: '',
       rib: '',
+      role: false
     },
     validationSchema: validationSchema,
-    onSubmit: (values) =>
+    onSubmit: async (values) =>
     {
+      await sleep(500)
       alert(JSON.stringify(values, null, 2));
     },
   });
-  const [checked, setChecked] = useState(false)
-  const handleChange = (event) =>
-  {
-    setChecked(event.target.checked);
-  };
   const classes = useStyles();
   return (
     <Grid container>
@@ -180,7 +184,7 @@ const Register = () =>
                   />
                 </Grid>
                 {
-                  checked &&
+                  formik.values.role &&
                   <Grid item xs={12}>
                     <TextField
                       variant="outlined"
@@ -210,17 +214,18 @@ const Register = () =>
               <Grid container>
                 <Grid item xs>
                   Client
-                  <Switch
-                    checked={checked}
-                    onChange={handleChange}
+                    <Switch
+                    // checked={checked}
+                    checked={formik.values.role}
+                    onChange={formik.handleChange}
                     color="primary"
-                    name="checkedB"
+                    name="role"
                     inputProps={{ 'aria-label': 'primary checkbox' }}
                   />
                   Owner
                 </Grid>
                 <Grid item>
-                  <Link href="#" variant="body2">
+                  <Link to="/login" variant="body2">
                     {"Don't have an account? Sign Up"}
                   </Link>
                 </Grid>
@@ -233,7 +238,7 @@ const Register = () =>
         </Grid>
         <Grid item xs={false} sm={12} md={5} className={classes.image} />
       </Grid>
-    </Grid>
+    </Grid >
   );
 };
 
