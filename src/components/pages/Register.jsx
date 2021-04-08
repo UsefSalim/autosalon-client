@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Link } from 'react-router-dom';
+import { Link, Redirect } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -13,6 +13,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Switch } from '@material-ui/core';
+import axios from 'axios';
+import { useEffect } from 'react';
+// axios.defaults.withCredentials = true;
 const validationSchema = yup.object({
   email: yup
     .string('Enter your email')
@@ -53,10 +56,9 @@ const validationSchema = yup.object({
 
 });
 
-const Register = () =>
+const Register = (props) =>
 {
-  // const [checked, setChecked] = useState(false)
-  const sleep = (ms) => new Promise((r) => setTimeout(r, ms));
+  const [errorMailExist, setErrorMailExist] = useState('')
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -66,13 +68,20 @@ const Register = () =>
       cin: '',
       phone: '',
       rib: '',
-      role: false
+      role: true
     },
     validationSchema: validationSchema,
     onSubmit: async (values) =>
     {
-      await sleep(500)
-      alert(JSON.stringify(values, null, 2));
+      if (!values.role) delete values.rib
+      try
+      {
+        const { data } = await axios.post('http://localhost:5000/api/auth/register', values)
+        data && props.history.push("/login")
+      } catch (error)
+      {
+        setErrorMailExist(error.response.request.response)
+      }
     },
   });
   const classes = useStyles();
@@ -81,6 +90,7 @@ const Register = () =>
       <Grid xs={false} sm={1} />
       <Grid container item xs={12} sm={10} component="main" className={classes.root}>
         <CssBaseline />
+        <p>{(errorMailExist && errorMailExist)}</p>
         <Grid item xs={12} sm={12} md={7} component={Paper} elevation={6} square>
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
@@ -88,7 +98,8 @@ const Register = () =>
             </Avatar>
             <Typography component="h1" variant="h5">
               Sign Up
-          </Typography>
+            </Typography>
+
             <form className={classes.form} onSubmit={formik.handleSubmit}>
               <Grid container spacing={1}>
                 <Grid item xs={12}>
@@ -103,7 +114,7 @@ const Register = () =>
                     autoFocus
                     value={formik.values.email}
                     onChange={formik.handleChange}
-                    error={formik.touched.email && Boolean(formik.errors.email)}
+                    error={(formik.touched.email && Boolean(formik.errors.email))}
                     helperText={formik.touched.email && formik.errors.email}
                   />
                 </Grid>
@@ -215,7 +226,6 @@ const Register = () =>
                 <Grid item xs>
                   Client
                     <Switch
-                    // checked={checked}
                     checked={formik.values.role}
                     onChange={formik.handleChange}
                     color="primary"
@@ -248,7 +258,7 @@ function Copyright()
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
+      <Link color="inherit" to="https://autosalon-client-acsgrlx2h-usefsalim.vercel.app/">
         Your Website
       </Link>{' '}
       {new Date().getFullYear()}
