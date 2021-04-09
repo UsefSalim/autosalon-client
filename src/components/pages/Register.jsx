@@ -76,7 +76,7 @@ const Register = (props) =>
       if (!values.role) delete values.rib
       try
       {
-        const { data } = await axios.post('http://localhost:5000/api/auth/register', values)
+        const { data } = await axios.post('https://whispering-meadow-94050.herokuapp.com/api/auth/register', values)
         data && props.history.push("/login")
       } catch (error)
       {
