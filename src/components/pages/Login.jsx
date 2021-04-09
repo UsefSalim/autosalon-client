@@ -11,8 +11,13 @@ import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
 import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
+import Alert from '@material-ui/lab/Alert';
 import { makeStyles } from '@material-ui/core/styles';
 import { Switch } from '@material-ui/core';
+import { useDispatch, useSelector } from 'react-redux'
+import { authlogin } from '../../redux/ducks/authSlice'
+import axios from "axios"
+axios.defaults.withCredentials = true;
 const validationSchema = yup.object({
   email: yup
     .string('Enter your email')
@@ -24,8 +29,10 @@ const validationSchema = yup.object({
     .required('Password is required'),
 });
 
-const Login = () =>
+const Login = (props) =>
 {
+  const dispatch = useDispatch()
+  const { role, ErrorAuth } = useSelector((state) => state.authentification)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -33,9 +40,11 @@ const Login = () =>
       role: false
     },
     validationSchema: validationSchema,
-    onSubmit: (values) =>
+    onSubmit: async (values) =>
     {
-      alert(JSON.stringify(values, null, 2));
+      dispatch(authlogin(values))
+      role === 'Client' && props.history.push("/client")
+      role === 'Owner' && props.history.push("/owner")
     },
   });
 
@@ -54,6 +63,9 @@ const Login = () =>
             <Typography component="h1" variant="h5">
               Sign in
           </Typography>
+            {ErrorAuth && <Alert variant="filled" severity="error">
+              Email ou mot de pass incorrect
+            </Alert>}
             <form className={classes.form} onSubmit={formik.handleSubmit}>
               <TextField
                 variant="outlined"

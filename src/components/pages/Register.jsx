@@ -13,9 +13,9 @@ import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Switch } from '@material-ui/core';
+import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
-import { useEffect } from 'react';
-// axios.defaults.withCredentials = true;
+
 const validationSchema = yup.object({
   email: yup
     .string('Enter your email')
@@ -58,7 +58,7 @@ const validationSchema = yup.object({
 
 const Register = (props) =>
 {
-  const [errorMailExist, setErrorMailExist] = useState('')
+  const [errorMailExist, setErrorMailExist] = useState(false)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -68,7 +68,7 @@ const Register = (props) =>
       cin: '',
       phone: '',
       rib: '',
-      role: true
+      role: false
     },
     validationSchema: validationSchema,
     onSubmit: async (values) =>
@@ -76,11 +76,11 @@ const Register = (props) =>
       if (!values.role) delete values.rib
       try
       {
-        const { data } = await axios.post('https://whispering-meadow-94050.herokuapp.com/api/auth/register', values)
+        const { data } = await axios.post('http://localhost:5000/api/auth/register', values)
         data && props.history.push("/login")
       } catch (error)
       {
-        setErrorMailExist(error.response.request.response)
+        setErrorMailExist(true)
       }
     },
   });
@@ -90,7 +90,6 @@ const Register = (props) =>
       <Grid xs={false} sm={1} />
       <Grid container item xs={12} sm={10} component="main" className={classes.root}>
         <CssBaseline />
-        <p>{(errorMailExist && errorMailExist)}</p>
         <Grid item xs={12} sm={12} md={7} component={Paper} elevation={6} square>
           <div className={classes.paper}>
             <Avatar className={classes.avatar}>
@@ -99,7 +98,9 @@ const Register = (props) =>
             <Typography component="h1" variant="h5">
               Sign Up
             </Typography>
-
+            {errorMailExist && <Alert variant="filled" severity="error">
+              Mail existant Veiller vous connecter
+            </Alert>}
             <form className={classes.form} onSubmit={formik.handleSubmit}>
               <Grid container spacing={1}>
                 <Grid item xs={12}>
