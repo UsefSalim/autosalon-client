@@ -1,15 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { Switch, Route, Redirect } from 'react-router-dom'
 import Home from "../components/pages/Home";
 import Register from "../components/pages/Register";
 import Login from "../components/pages/Login";
 import Owner from "./pages/Owner";
-import { useDispatch, useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 import Client from "./pages/Client";
 function Routes()
 {
-  const { role, ErrorAuth, isAuthenticated } = useSelector((state) => state.authentification)
+  const { role, isAuthenticated } = useSelector((state) => state.authentification)
   return (
     <Switch>
       <Route exact path="/" component={Home} />

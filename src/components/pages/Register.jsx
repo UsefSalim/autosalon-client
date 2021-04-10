@@ -5,7 +5,7 @@ import Button from '@material-ui/core/Button';
 import TextField from '@material-ui/core/TextField';
 import Avatar from '@material-ui/core/Avatar';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import { Link, Redirect } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import Paper from '@material-ui/core/Paper';
 import Box from '@material-ui/core/Box';
 import Grid from '@material-ui/core/Grid';
@@ -15,6 +15,8 @@ import { makeStyles } from '@material-ui/core/styles';
 import { Switch } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { authregister } from '../../redux/ducks/authSlice';
 
 const validationSchema = yup.object({
   email: yup
@@ -58,7 +60,8 @@ const validationSchema = yup.object({
 
 const Register = (props) =>
 {
-  const [errorMailExist, setErrorMailExist] = useState(false)
+  const dispatch = useDispatch()
+  const { ErrorAuth } = useSelector((state) => state.authentification)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -74,14 +77,7 @@ const Register = (props) =>
     onSubmit: async (values) =>
     {
       if (!values.role) delete values.rib
-      try
-      {
-        const { data } = await axios.post('http://localhost:5000/api/auth/register', values)
-        data && props.history.push("/login")
-      } catch (error)
-      {
-        setErrorMailExist(true)
-      }
+      dispatch(authregister(values))
     },
   });
   const classes = useStyles();
@@ -98,7 +94,7 @@ const Register = (props) =>
             <Typography component="h1" variant="h5">
               Sign Up
             </Typography>
-            {errorMailExist && <Alert variant="filled" severity="error">
+            {ErrorAuth && <Alert variant="filled" severity="error">
               Mail existant Veiller vous connecter
             </Alert>}
             <form className={classes.form} onSubmit={formik.handleSubmit}>

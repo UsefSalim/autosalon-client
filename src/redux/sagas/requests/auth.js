@@ -10,9 +10,24 @@ export function requestLogin(action) {
     },
   });
 }
+export function requestRegister(action) {
+  return axios.request({
+    method: "post",
+    url: `${URL}/auth/register`,
+    data: {
+      ...action.payload,
+    },
+  });
+}
 export function requestIfLogin(action) {
   return axios.request({
     method: "get",
     url: `${URL}`,
+  });
+}
+export function requestLogout(action) {
+  return axios.request({
+    method: "get",
+    url: `${URL}/auth/logout`,
   });
 }

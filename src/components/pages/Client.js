@@ -1,24 +1,18 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { useDispatch, useSelector } from "react-redux";
-import { authlogin } from "../../redux/ducks/authSlice";
-// const getProfileClient = async (props) => {
-//   try {
-//     const { data } = await axios.get("http://localhost:5000/api/client");
-//   } catch (error) {
-//     error && props.history.push("/login");
-//     console.log(error);
-//   }
-// };
+import { useEffect } from "react";
+
+import { useDispatch } from "react-redux";
+import { authlogout } from "../../redux/ducks/authSlice";
 
 function Client(props) {
-  // useEffect(() => {
-  //   // getProfileClient(props);
-  // });
+  const dispatch = useDispatch();
+  const handelLogout = () => {
+    dispatch(authlogout());
+  };
+  useEffect(() => {});
   return (
     <>
-      <button>Logout</button>
+      <button onClick={handelLogout}>Logout</button>
       <div> Client Private rOOt</div>
     </>
   );

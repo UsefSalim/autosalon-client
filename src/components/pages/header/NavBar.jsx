@@ -8,6 +8,7 @@ function NavBar()
       <Link to="/login" >Login</Link>
       <Link to="/owner" >owner</Link>
       <Link to="/client" >client</Link>
+      <Link to="/logout" >Logout</Link>
     </div>
   )
 }
