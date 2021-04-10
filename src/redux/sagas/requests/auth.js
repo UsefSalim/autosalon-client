@@ -10,3 +10,9 @@ export function requestLogin(action) {
     },
   });
 }
+export function requestIfLogin(action) {
+  return axios.request({
+    method: "get",
+    url: `${URL}`,
+  });
+}

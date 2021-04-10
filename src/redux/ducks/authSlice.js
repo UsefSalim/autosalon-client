@@ -9,16 +9,12 @@ const authSlice = createSlice({
   },
   reducers: {
     authlogin: (state = this.initialState, action) => {},
-    setRole: (state = this.initialState, action) => {
-      return {
-        ...state,
-        role: action.payload,
-      };
-    },
+    ifLogedIn: (state = this.initialState, action) => {},
     isLogedIn: (state = this.initialState, action) => {
       return {
         ...state,
-        isAuthenticated: action.payload,
+        isAuthenticated: action.payload.isAuthenticated,
+        role: action.payload.role,
       };
     },
     ErrorLogin: (state = this.initialState, action) => {
@@ -30,5 +26,10 @@ const authSlice = createSlice({
   },
 });
 
-export const { authlogin, setRole, isLogedIn, ErrorLogin } = authSlice.actions;
+export const {
+  authlogin,
+  isLogedIn,
+  ErrorLogin,
+  ifLogedIn,
+} = authSlice.actions;
 export default authSlice.reducer;

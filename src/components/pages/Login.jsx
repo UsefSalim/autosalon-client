@@ -32,7 +32,7 @@ const validationSchema = yup.object({
 const Login = (props) =>
 {
   const dispatch = useDispatch()
-  const { role, ErrorAuth } = useSelector((state) => state.authentification)
+  const { ErrorAuth } = useSelector((state) => state.authentification)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -40,11 +40,9 @@ const Login = (props) =>
       role: false
     },
     validationSchema: validationSchema,
-    onSubmit: async (values) =>
+    onSubmit: (values) =>
     {
       dispatch(authlogin(values))
-      role === 'Client' && props.history.push("/client")
-      role === 'Owner' && props.history.push("/owner")
     },
   });
 
