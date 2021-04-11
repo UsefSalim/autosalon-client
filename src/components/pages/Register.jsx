@@ -61,7 +61,7 @@ const validationSchema = yup.object({
 const Register = (props) =>
 {
   const dispatch = useDispatch()
-  const { ErrorAuth } = useSelector((state) => state.authentification)
+  const { ErrorRegister } = useSelector((state) => state.authentification)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -94,7 +94,7 @@ const Register = (props) =>
             <Typography component="h1" variant="h5">
               Sign Up
             </Typography>
-            {ErrorAuth && <Alert variant="filled" severity="error">
+            {ErrorRegister && <Alert variant="filled" severity="error">
               Mail existant Veiller vous connecter
             </Alert>}
             <form className={classes.form} onSubmit={formik.handleSubmit}>

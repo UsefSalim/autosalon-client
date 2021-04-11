@@ -10,11 +10,15 @@ import {
   handelIfLogin,
   handelLogout,
   handelRegister,
-} from "./handlers/auth";
+} from "./handlers/auth.handler";
+import { getProfileInfo, addCar } from "../ducks/ownerSlice";
+import { handelGetProfileOwner, handelAddCar } from "./handlers/owner.handler";
 
 export function* watcherSaga() {
   yield takeLatest(ifLogedIn.type, handelIfLogin);
   yield takeLatest(authlogin.type, handelLogin);
   yield takeLatest(authlogout.type, handelLogout);
   yield takeLatest(authregister.type, handelRegister);
+  yield takeLatest(getProfileInfo.type, handelGetProfileOwner);
+  yield takeLatest(addCar.type, handelAddCar);
 }

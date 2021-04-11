@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
@@ -32,7 +32,8 @@ const validationSchema = yup.object({
 const Login = (props) =>
 {
   const dispatch = useDispatch()
-  const { ErrorAuth } = useSelector((state) => state.authentification)
+  const [disable, setDisable] = useState(false)
+  const { ErrorAuth, isAuthenticated } = useSelector((state) => state.authentification)
   const formik = useFormik({
     initialValues: {
       email: '',
@@ -42,6 +43,7 @@ const Login = (props) =>
     validationSchema: validationSchema,
     onSubmit: (values) =>
     {
+      isAuthenticated && setDisable(true)
       dispatch(authlogin(values))
     },
   });
@@ -93,15 +95,17 @@ const Login = (props) =>
                 error={formik.touched.password && Boolean(formik.errors.password)}
                 helperText={formik.touched.password && formik.errors.password}
               />
-              <Button
-                type="submit"
-                fullWidth
-                variant="contained"
-                color="primary"
-                className={classes.submit}
-              >
-                Sign In
-            </Button>
+              {!disable &&
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  color="primary"
+                  className={classes.submit}
+
+                >
+                  Sign In
+            </Button>}
               <Grid container>
                 <Grid item xs>
                   Client

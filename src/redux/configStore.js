@@ -6,6 +6,7 @@ import {
 import createSagaMiddleware from "redux-saga";
 import { watcherSaga } from "./sagas/rootSaga";
 import authSlice from "./ducks/authSlice";
+import ownerSlice from "./ducks/ownerSlice";
 
 // create a saga middleware
 const sagaMiddleware = createSagaMiddleware();
@@ -14,6 +15,7 @@ const middleware = [sagaMiddleware];
 
 const reducer = combineReducers({
   authentification: authSlice,
+  owner: ownerSlice,
 });
 
 export default configureStore({

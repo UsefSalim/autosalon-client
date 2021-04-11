@@ -4,7 +4,7 @@ import {
   requestIfLogin,
   requestLogout,
   requestRegister,
-} from "../requests/auth";
+} from "../requests/auth.request";
 import { isLogedIn, ErrorLogin, ErrorRegister } from "../../ducks/authSlice";
 
 export function* handelLogin(action) {
@@ -24,7 +24,7 @@ export function* handelRegister(action) {
       yield put(isLogedIn(data));
     }
   } catch (error) {
-    if (error.response) yield put(ErrorLogin(error.response.data));
+    if (error.response) yield put(ErrorRegister(error.response.data));
   }
 }
 export function* handelIfLogin(action) {
