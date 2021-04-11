@@ -49,7 +49,7 @@ function Owner(props)
     <Container>
       {Object.keys(Owner).length === 0 && Owner.constructor === Object ?
         null
-        : <Header Owner={Owner} handelLogout={handelLogout} />
+        : <Header User={Owner} handelLogout={handelLogout} />
       }
 
 
