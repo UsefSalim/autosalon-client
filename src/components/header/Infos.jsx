@@ -2,11 +2,11 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
 import CardActionArea from '@material-ui/core/CardActionArea';
-import CardActions from '@material-ui/core/CardActions';
+
 import CardContent from '@material-ui/core/CardContent';
-import Button from '@material-ui/core/Button';
+
 import Typography from '@material-ui/core/Typography';
-import { Link, Redirect } from 'react-router-dom';
+
 
 const useStyles = makeStyles({
   root: {
@@ -17,7 +17,7 @@ const useStyles = makeStyles({
   },
 });
 
-export default function Car(props)
+export default function Infos(props)
 {
   const classes = useStyles();
   return (
@@ -25,40 +25,25 @@ export default function Car(props)
       <CardActionArea>
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            Car Name :{props.name}
+            First Name:{props.first_name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Fuel: {props.fuel}
+            Last Name: {props.last_name}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Color: {props.color}
+            Cin: {props.cin}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Mark: {props.mark}
+            Email: {props.email}
           </Typography>
           <Typography variant="body2" color="textSecondary" component="p">
-            Price: {props.price}
+            Phone: {props.phone}
           </Typography>
-          <Typography variant="body2" color="textSecondary" component="p">
-            Registration Number: {props.registration_number}
-          </Typography>
+          {props.rib &&
+            <Typography variant="body2" color="textSecondary" component="p">
+              Rib: {parseInt(props.rib)}
+            </Typography>}
         </CardContent>
-        {
-          props.role === 'Client' &&
-          (<CardActions>
-            <Button size="small" color="primary" onClick={() => props.tryCar(props._id)}>
-              Esseyer
-            </Button>
-            {/* <Button size="small" color="secondary" onClick={() =>
-            {
-              props.handelSingelAchat(props._id)
-            }}>
-              <Link to={`/client/checkout/${props._id}`} > Acheter</Link> 
-              Acheter
-            </Button> */}
-            {props.Checkout(props)}
-          </CardActions>)
-        }
       </CardActionArea>
 
     </Card>

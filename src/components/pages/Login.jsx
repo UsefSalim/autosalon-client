@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useFormik } from 'formik';
 import * as yup from 'yup';
 import Button from '@material-ui/core/Button';
@@ -32,7 +32,7 @@ const validationSchema = yup.object({
 const Login = (props) =>
 {
   const dispatch = useDispatch()
-  const [disable, setDisable] = useState(false)
+  // const [disable, setDisable] = useState(false)
   const { ErrorAuth, isAuthenticated } = useSelector((state) => state.authentification)
   const formik = useFormik({
     initialValues: {
@@ -43,7 +43,7 @@ const Login = (props) =>
     validationSchema: validationSchema,
     onSubmit: (values) =>
     {
-      isAuthenticated && setDisable(true)
+
       dispatch(authlogin(values))
     },
   });
