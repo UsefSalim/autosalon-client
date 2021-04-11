@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 
 function Home(props)
 {
-  console.log(props);
   setTimeout(() =>
   {
     props.history.push("/register");
@@ -11,7 +10,7 @@ function Home(props)
   {
     document.title = "Home Page";
   }, []);
-  return <>Redirrect To register page</>;
+  return <></>;
 }
 
 export default Home;

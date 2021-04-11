@@ -59,6 +59,16 @@ export default function Car(props)
             {props.Checkout(props)}
           </CardActions>)
         }
+
+        {props.role === 'Owner' &&
+          <CardActions>
+            <Button size="small" color="primary" >
+              Accepter
+            </Button>
+            <Button size="small" color="primary" >
+              Refuser
+            </Button>
+          </CardActions>}
       </CardActionArea>
 
     </Card>

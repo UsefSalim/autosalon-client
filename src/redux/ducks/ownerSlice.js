@@ -5,6 +5,7 @@ const ownerSlice = createSlice({
     Owner: {},
     ownerCars: [],
     reserveCars: [],
+    reserveCarReduction: [],
   },
   reducers: {
     getProfileInfo: (state = this.initialState, action) => {},
@@ -16,13 +17,18 @@ const ownerSlice = createSlice({
       };
     },
     ProfileInfo: (state = this.initialState, action) => {
-      const { Owner, ownerCars, reserveCars } = action.payload;
-      console.log(action);
+      const {
+        Owner,
+        ownerCars,
+        reserveCars,
+        reserveCarReduction,
+      } = action.payload;
       return {
         ...state,
         Owner,
         reserveCars,
         ownerCars,
+        reserveCarReduction,
       };
     },
   },

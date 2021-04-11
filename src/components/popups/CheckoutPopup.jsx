@@ -1,6 +1,5 @@
 import
 {
-  Card,
   CardContent,
   Container,
   Grid,
@@ -9,8 +8,8 @@ import
   Button,
 } from "@material-ui/core";
 import { useFormik } from "formik";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import React, { useEffect } from "react";
+
 import { useDispatch, useSelector } from "react-redux";
 import { getCheckout, ByCar } from "../../redux/ducks/clientSlice";
 import Car from "../header/Car";

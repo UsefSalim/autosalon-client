@@ -17,7 +17,7 @@ function Owner(props)
   const { Owner,
     reserveCars,
     ownerCars,
-    reserveCarNonAccepter, } = useSelector((state) => state.owner)
+    reserveCarReduction, } = useSelector((state) => state.owner)
   useEffect(() =>
   {
     dispatch(getProfileInfo())
@@ -65,7 +65,7 @@ function Owner(props)
             {(ownerCars.length > 0) && ownerCars.map((car) =>
             (
               <Grid key={car._id} item xs={12} sm={6} md={4}>
-                <Car  {...car} role="Owner" />
+                <Car  {...car} />
               </Grid>
             ))}
           </Grid>
@@ -74,6 +74,17 @@ function Owner(props)
           </Typography>
           <Grid container >
             {(reserveCars.length > 0) && reserveCars.map((car) =>
+            (
+              <Grid key={car._id} item xs={12} sm={6} md={4}>
+                <Car  {...car} />
+              </Grid>
+            ))}
+          </Grid>
+          <Typography gutterBottom variant="h5" component="h2">
+            Reserved Cars Reduction
+          </Typography>
+          <Grid container >
+            {(reserveCarReduction.length > 0) && reserveCarReduction.map((car) =>
             (
               <Grid key={car._id} item xs={12} sm={6} md={4}>
                 <Car  {...car} role="Owner" />
