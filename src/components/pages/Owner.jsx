@@ -62,8 +62,8 @@ function Owner(props)
           <Grid container >
             {(ownerCars.length > 0) && ownerCars.map((car) =>
             (
-              <Grid item xs={12} sm={6} md={4}>
-                <Car {...car} />
+              <Grid key={car._id} item xs={12} sm={6} md={4}>
+                <Car  {...car} role="Owner" />
               </Grid>
             ))}
           </Grid>

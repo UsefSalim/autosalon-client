@@ -51,7 +51,7 @@ const Login = (props) =>
   const classes = useStyles();
   return (
     <Grid container>
-      <Grid xs={false} sm={1} />
+      <Grid item xs={false} sm={1} />
       <Grid container item xs={12} sm={10} component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={12} md={7} className={classes.image} />
@@ -95,17 +95,17 @@ const Login = (props) =>
                 error={formik.touched.password && Boolean(formik.errors.password)}
                 helperText={formik.touched.password && formik.errors.password}
               />
-              {!disable &&
-                <Button
-                  type="submit"
-                  fullWidth
-                  variant="contained"
-                  color="primary"
-                  className={classes.submit}
 
-                >
-                  Sign In
-            </Button>}
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+
+              >
+                Sign In
+                </Button>
               <Grid container>
                 <Grid item xs>
                   Client
@@ -141,8 +141,8 @@ function Copyright()
   return (
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
+      <Link color="inherit" to="http://localhost:5000">
+        Auto Salon
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}

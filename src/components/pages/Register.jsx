@@ -14,7 +14,6 @@ import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import { Switch } from '@material-ui/core';
 import Alert from '@material-ui/lab/Alert';
-import axios from 'axios';
 import { useDispatch, useSelector } from 'react-redux';
 import { authregister } from '../../redux/ducks/authSlice';
 
@@ -218,7 +217,7 @@ const Register = (props) =>
                 className={classes.submit}
               >
                 Sign In
-            </Button>
+              </Button>
               <Grid container>
                 <Grid item xs>
                   Client
@@ -256,7 +255,7 @@ function Copyright()
     <Typography variant="body2" color="textSecondary" align="center">
       {'Copyright © '}
       <Link color="inherit" to="https://autosalon-client-acsgrlx2h-usefsalim.vercel.app/">
-        Your Website
+        Auto Salon
       </Link>{' '}
       {new Date().getFullYear()}
       {'.'}

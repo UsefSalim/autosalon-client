@@ -7,3 +7,9 @@ export function clientProfileRequest(action) {
     url: `${URL}`,
   });
 }
+export function esseyCarRequest(action) {
+  return axios.request({
+    method: "get",
+    url: `${URL}/trycar/${action.payload}`,
+  });
+}
