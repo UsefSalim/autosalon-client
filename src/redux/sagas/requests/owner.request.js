@@ -16,3 +16,17 @@ export function addCarRequest(action) {
     },
   });
 }
+export function tretementOffreAcceptedRequest(action) {
+  return axios.request({
+    method: "post",
+    url: `${URL}/tretementoffreaccepted`,
+    data: { id: action.payload },
+  });
+}
+export function tretementOffreRefusedRequest(action) {
+  return axios.request({
+    method: "post",
+    url: `${URL}/tretementoffrerefusd`,
+    data: { id: action.payload },
+  });
+}

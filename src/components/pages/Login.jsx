@@ -28,12 +28,11 @@ const validationSchema = yup.object({
     .min(8, 'Password should be of minimum 8 characters length')
     .required('Password is required'),
 });
-
 const Login = (props) =>
 {
   const dispatch = useDispatch()
   // const [disable, setDisable] = useState(false)
-  const { ErrorAuth, isAuthenticated } = useSelector((state) => state.authentification)
+  const { ErrorAuth } = useSelector((state) => state.authentification)
   const formik = useFormik({
     initialValues: {
       email: '',

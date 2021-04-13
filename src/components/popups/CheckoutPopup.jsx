@@ -10,7 +10,7 @@ import
 import { useFormik } from "formik";
 import React, { useEffect } from "react";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { getCheckout, ByCar } from "../../redux/ducks/clientSlice";
 import Car from "../header/Car";
 import Infos from "../header/Infos";
@@ -30,7 +30,7 @@ function CheckoutPopup(props)
   useEffect(() =>
   {
     dispatch(getCheckout(id));
-  }, [dispatch]);
+  }, [dispatch, id]);
 
   return (
     <Container>

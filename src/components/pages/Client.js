@@ -28,7 +28,10 @@ function Client(props) {
     Success,
     InfoOwner,
     InfoSingleCar,
+    reserverdCar,
+    reservedCarWithreduction,
   } = useSelector((state) => state.client);
+  console.log(reserverdCar);
   useEffect(() => {
     dispatch(getProfileClient());
   }, [dispatch]);
@@ -95,13 +98,51 @@ function Client(props) {
               {`${currentClient.global_tries}/10`}
             </>
           )}
-          <Grid container>
+          <Grid container spacing={2}>
             {allCars.length > 0 &&
               allCars.map((car) => (
                 <Grid key={car._id} item xs={12} sm={6} md={4}>
                   <Car
                     {...car}
                     role="Client"
+                    tryCar={esseyCarHandel}
+                    Checkout={Checkout}
+                    allCars={true}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+          {reserverdCar.length > 0 && (
+            <Typography gutterBottom variant="h5" component="h2">
+              Reserverd Cars
+            </Typography>
+          )}
+          <Grid container spacing={2}>
+            {reserverdCar.length > 0 &&
+              reserverdCar.map((car) => (
+                <Grid key={car.id_car._id} item xs={12} sm={6} md={4}>
+                  <Car
+                    {...car.id_car}
+                    role="Client"
+                    tryCar={esseyCarHandel}
+                    Checkout={Checkout}
+                  />
+                </Grid>
+              ))}
+          </Grid>
+          {reservedCarWithreduction.length > 0 && (
+            <Typography gutterBottom variant="h5" component="h2">
+              Reserverd Cars with reduction
+            </Typography>
+          )}
+          <Grid container spacing={2}>
+            {reservedCarWithreduction.length > 0 &&
+              reservedCarWithreduction.map((car) => (
+                <Grid key={car.id_car._id} item xs={12} sm={6} md={4}>
+                  <Car
+                    {...car.id_car}
+                    role="Client"
+                    reduction={car.proposed_reduction}
                     tryCar={esseyCarHandel}
                     Checkout={Checkout}
                   />

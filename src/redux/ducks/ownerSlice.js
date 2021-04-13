@@ -6,8 +6,12 @@ const ownerSlice = createSlice({
     ownerCars: [],
     reserveCars: [],
     reserveCarReduction: [],
+    validation: "",
   },
   reducers: {
+    tretementOffreAccepted: (state = this.initialState, action) => {},
+    tretementOffreRefused: (state = this.initialState, action) => {},
+
     getProfileInfo: (state = this.initialState, action) => {},
     addCar: (state = this.initialState, action) => {},
     relodCars: (state = this.initialState, action) => {
@@ -39,5 +43,7 @@ export const {
   getProfileInfo,
   addCar,
   relodCars,
+  tretementOffreRefused,
+  tretementOffreAccepted,
 } = ownerSlice.actions;
 export default ownerSlice.reducer;

@@ -1,7 +1,7 @@
 import React from 'react'
 import { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getProfileInfo } from '../../redux/ducks/ownerSlice'
+import { getProfileInfo, tretementOffreAccepted, tretementOffreRefused } from '../../redux/ducks/ownerSlice'
 import { authlogout } from "../../redux/ducks/authSlice";
 import Container from '@material-ui/core/Container';
 import Header from '../header/Header'
@@ -23,6 +23,14 @@ function Owner(props)
     dispatch(getProfileInfo())
 
   }, [dispatch])
+  const acceptedOffre = (id) =>
+  {
+    dispatch(tretementOffreAccepted(id))
+  }
+  const RefusedOffreHandler = (id) =>
+  {
+    dispatch(tretementOffreRefused(id))
+  }
   const AddCar = () => (
     <Popup trigger={
       <Button
@@ -58,36 +66,40 @@ function Owner(props)
       <Card style={{ marginTop: "48px" }} >
         <CardContent>
           {AddCar()}
-          <Typography gutterBottom variant="h5" component="h2">
-            My Cars
-          </Typography>
-          <Grid container >
+          {ownerCars.length > 0 &&
+            <Typography gutterBottom variant="h5" component="h2">
+              My Cars
+          </Typography>}
+          <Grid container spacing={2}>
             {(ownerCars.length > 0) && ownerCars.map((car) =>
             (
-              <Grid key={car._id} item xs={12} sm={6} md={4}>
-                <Car  {...car} />
+              <Grid key={car.id_car._id} item xs={12} sm={6} md={4}>
+                <Car  {...car.id_car} />
               </Grid>
             ))}
           </Grid>
-          <Typography gutterBottom variant="h5" component="h2">
-            Reserved Cars Cars
-          </Typography>
-          <Grid container >
+          {reserveCars.length > 0 &&
+            <Typography gutterBottom variant="h5" component="h2">
+              Reserved Cars
+          </Typography>}
+          <Grid container spacing={2} >
             {(reserveCars.length > 0) && reserveCars.map((car) =>
             (
-              <Grid key={car._id} item xs={12} sm={6} md={4}>
-                <Car  {...car} />
+              <Grid key={car.id_car._id} item xs={12} sm={6} md={4}>
+                <Car  {...car.id_car} />
               </Grid>
             ))}
           </Grid>
-          <Typography gutterBottom variant="h5" component="h2">
-            Reserved Cars Reduction
-          </Typography>
-          <Grid container >
+          {reserveCarReduction.length > 0 &&
+            <Typography gutterBottom variant="h5" component="h2">
+              Reserved Cars Reduction
+          </Typography>}
+          <Grid container spacing={2} >
             {(reserveCarReduction.length > 0) && reserveCarReduction.map((car) =>
             (
-              <Grid key={car._id} item xs={12} sm={6} md={4}>
-                <Car  {...car} role="Owner" />
+              <Grid key={car.id_car._id} item xs={12} sm={6} md={4}>
+                <Car  {...car.id_car} reduction={car.proposed_reduction} role="Owner" RefusedOffreHandler={RefusedOffreHandler}
+                  acceptedOffre={acceptedOffre} />
               </Grid>
             ))}
           </Grid>

@@ -4,6 +4,8 @@ const ownerSlice = createSlice({
   initialState: {
     currentClient: {},
     allCars: [],
+    reservedCarWithreduction: [],
+    reserverdCar: [],
     Error: "",
     Success: "",
     InfoSingleCar: {},
@@ -13,9 +15,7 @@ const ownerSlice = createSlice({
     getProfileClient: (state = this.initialState, action) => {},
     esseyCar: (state = this.initialState, action) => {},
     ByCar: (state = this.initialState, action) => {},
-    getByCar: (state = this.initialState, action) => {
-      console.log(action);
-    },
+    getByCar: (state = this.initialState, action) => {},
     getCheckout: (state = this.initialState, action) => {},
     setCheckout: (state = this.initialState, action) => {
       return {
@@ -39,10 +39,17 @@ const ownerSlice = createSlice({
       };
     },
     dataProfile: (state = this.initialState, action) => {
-      const { currentClient, allCars } = action.payload;
+      const {
+        currentClient,
+        allCars,
+        reservedCarWithreduction,
+        reserverdCar,
+      } = action.payload;
       return {
         ...state,
         currentClient,
+        reserverdCar,
+        reservedCarWithreduction,
         allCars,
         Error: "",
         Success: "",

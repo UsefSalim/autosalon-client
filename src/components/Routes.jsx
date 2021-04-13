@@ -18,7 +18,6 @@ function Routes()
       <ProtectedAuthRoute exact auth={isAuthenticated} role={role} path="/login" component={Login} />
       <ProtectedOwnerRoute exact auth={isAuthenticated} role={role} path="/owner" component={Owner} />
       <ProtectedClientRoute exact auth={isAuthenticated} role={role} path="/client" component={Client} />
-      {/* <ProtectedClientRoute exact auth={isAuthenticated} role={role} path="/client/checkout/:id" component={SingleOffre} /> */}
     </Switch>
   )
 }

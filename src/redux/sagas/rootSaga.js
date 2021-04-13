@@ -11,8 +11,18 @@ import {
   handelLogout,
   handelRegister,
 } from "./handlers/auth.handler";
-import { getProfileInfo, addCar } from "../ducks/ownerSlice";
-import { handelGetProfileOwner, handelAddCar } from "./handlers/owner.handler";
+import {
+  getProfileInfo,
+  addCar,
+  tretementOffreAccepted,
+  tretementOffreRefused,
+} from "../ducks/ownerSlice";
+import {
+  handelGetProfileOwner,
+  handelAddCar,
+  handelTretementOffreAccepted,
+  handelTretementOffreRefused,
+} from "./handlers/owner.handler";
 import {
   getProfileClient,
   esseyCar,
@@ -37,4 +47,6 @@ export function* watcherSaga() {
   yield takeLatest(esseyCar.type, handelEssyCar);
   yield takeLatest(getCheckout.type, handelCheckout);
   yield takeLatest(ByCar.type, handelByCar);
+  yield takeLatest(tretementOffreAccepted.type, handelTretementOffreAccepted);
+  yield takeLatest(tretementOffreRefused.type, handelTretementOffreRefused);
 }
